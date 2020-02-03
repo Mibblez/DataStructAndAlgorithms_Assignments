@@ -114,7 +114,6 @@ void Queue::Dequeue() {
     }
 
     // Iterate through the queue from rear to front and remove front
-    // *& is pointer by reference or some shit. I need it here otherwise things get fucky
     std::function<void (Node*&)> DequeueRecursion = [&DequeueRecursion] (Node*& node) {
         if (!node->nextPtr) {
             delete[](node);
@@ -161,7 +160,7 @@ int Queue::Rear() const {
 int Queue::Peek(int n) const {
     if (this->IsEmpty()) {
         throw QueueEmpty();
-    } else if (n > this->count) {
+    } else if (n >= this->count) {
        throw QueueInvalidPeek();
     }
 
